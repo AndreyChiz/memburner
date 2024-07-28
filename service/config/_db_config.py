@@ -2,8 +2,18 @@ from pydantic import BaseModel, PostgresDsn
 
 
 class DatabaseConfig(BaseModel):
-    url: PostgresDsn
+    host: str
+    port: int
+    name: str
+    user: str
+    password: str
+
+    # url: PostgresDsn
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
     max_overflow: int = 10
+
+    @property
+    def url(self):
+        return f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
