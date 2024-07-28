@@ -7,14 +7,15 @@ from ._db_config import DatabaseConfig
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
         case_sensitive=False,
+        env_file=(".env.template", ".env"),
+        env_prefix="APP_CONFIG__",
         env_nested_delimiter="__",
-        env_prefix="APP_CONFIG__"
     )
     run: RunConfig = RunConfig()
     api: ApiConfig = ApiConfig()
-    database: DatabaseConfig 
+    database: DatabaseConfig
 
 
 settings = Settings()
+print(settings.database.url)
