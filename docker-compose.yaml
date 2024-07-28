@@ -1,8 +1,10 @@
-version: "3.9"
+
 services:
   postgres:
-    container_name: examination_service_pg_db
+    container_name: examination_service_pg_db_container
     image: postgres:16-alpine3.19
+    env_file:
+      - .env
     command:
       - "postgres"
       - "-c"
@@ -34,11 +36,11 @@ services:
       - "-c"
       - "pg_stat_statements.track=all"
     environment:
-      POSTGRES_DB: "examination_service_db"
-      POSTGRES_USER: "examination_service_db_user"
-      POSTGRES_PASSWORD: "examination_service_db_password"
+      POSTGRES_DB: "${APP_CONFIG__DATABASE__NAME}"
+      POSTGRES_USER: "${APP_CONFIG__DATABASE__USER}"
+      POSTGRES_PASSWORD: "${APP_CONFIG__DATABASE__PASSWORD}"
     ports:
-      - "5433:5432"
+      - "${APP_CONFIG__DATABASE__PORT}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d edu"]
       interval: 10s
