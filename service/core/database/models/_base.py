@@ -5,7 +5,7 @@ from sqlalchemy import text, event, DateTime, func, MetaData
 from sqlalchemy.dialects.postgresql import UUID as types_Uuid
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Mapped, mapped_column
 from typing import Any, Annotated
-from src.config import settings
+from config import settings
 
 idpk = Annotated[
     uuid.UUID, mapped_column(primary_key=True, server_default=text("gen_random_uuid()"))
