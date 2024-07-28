@@ -12,6 +12,7 @@ idpk = Annotated[
 ]
 
 
+
 class Base(DeclarativeBase):
     """
     The :class:`Base` class serves as the base class for all database models.

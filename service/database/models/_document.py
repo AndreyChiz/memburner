@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ._base import Base
 
 if TYPE_CHECKING:
-    from .section import Section
+    from ._section import Section
 
 
 class Document(Base):
