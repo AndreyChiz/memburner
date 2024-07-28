@@ -4,6 +4,9 @@
 run_db_conatainer:
 	docker-compose up -d
 
+run_app:
+	./.venv/bin/python ./service/main.py
+
 
 migration_autogenerate:
 	alembic revision --autogenerate    
@@ -14,11 +17,6 @@ migration_upgrade_db:
 
 migration_downgrade_db:
 	alembic downgrade base
-
-
-#Команда для зпроверки запросов в базу данных
-check_db_mamnger:
-	python -m src.exam_service.crud
 
 
 check_all:
