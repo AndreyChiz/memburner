@@ -5,6 +5,7 @@ from ._api_config import ApiConfig
 from ._run_config import RunConfig
 from ._db_config import DatabaseConfig
 
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         case_sensitive=False,
@@ -18,4 +19,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-print(settings.database.url)
