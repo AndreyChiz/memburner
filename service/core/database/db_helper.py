@@ -1,12 +1,3 @@
-__all__ = ("Base", "Document", "Section", "Question")
-
-
-# from ._base import Base
-# from .document import Document
-# from .section import Section
-# from .question import Question
-
-
 from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import (
     create_async_engine,
@@ -25,14 +16,14 @@ class DatabaseHelper:
         echo: bool = False,
         echo_pool: bool = False,
         pool_size: int = 5,
-        max_owerflow: int = 10,
+        max_overflow: int = 10,
     ) -> None:
         self.engine: AsyncEngine = create_async_engine(
             url=url,
             echo=echo,
             echo_pool=echo_pool,
             pool_size=pool_size,
-            max_owerflow=max_owerflow,
+            max_overflow=max_overflow,
         )
         self.session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(
             bind=self.engine,
@@ -54,6 +45,5 @@ db_helper = DatabaseHelper(
     echo=settings.database.echo,
     echo_pool=settings.database.echo_pool,
     pool_size=settings.database.pool_size,
-    max_owerflow=settings.database.max_owerflow,
+    max_overflow=settings.database.max_overflow,
 )
-
