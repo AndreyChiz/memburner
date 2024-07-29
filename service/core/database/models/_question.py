@@ -38,7 +38,7 @@ class Question(Base):
     :seealso: additional blank fields in :paramref:`exam_service.models._base.Base` parameter.
     """
 
-    question_text: Mapped[str] = mapped_column(unique=True)
+    quest_text: Mapped[str] = mapped_column(unique=True)
     answers: Mapped[list[str]] = mapped_column(ARRAY(String))
     section_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("section.id"))
     number_in_chapter: Mapped[int] = mapped_column(SmallInteger)

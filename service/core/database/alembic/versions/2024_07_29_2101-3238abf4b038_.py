@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c6e10dae8738
+Revision ID: 3238abf4b038
 Revises: 
-Create Date: 2024-07-29 20:46:12.483490
+Create Date: 2024-07-29 21:01:21.040644
 
 """
 
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "c6e10dae8738"
+revision: str = "3238abf4b038"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -71,7 +71,7 @@ def upgrade() -> None:
     )
     op.create_table(
         "question",
-        sa.Column("question_text", sa.String(), nullable=False),
+        sa.Column("quest_text", sa.String(), nullable=False),
         sa.Column("answers", sa.ARRAY(sa.String()), nullable=False),
         sa.Column("section_id", sa.Uuid(), nullable=False),
         sa.Column("number_in_chapter", sa.SmallInteger(), nullable=False),
@@ -94,9 +94,7 @@ def upgrade() -> None:
             name=op.f("fk_question_section_id_section"),
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_question")),
-        sa.UniqueConstraint(
-            "question_text", name=op.f("uq_question_question_text")
-        ),
+        sa.UniqueConstraint("quest_text", name=op.f("uq_question_quest_text")),
     )
     # ### end Alembic commands ###
 
