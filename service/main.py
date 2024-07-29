@@ -7,6 +7,8 @@ from api import root_api_router
 from config import settings
 from core.database import db_helper
 
+from core.database.models import Base
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

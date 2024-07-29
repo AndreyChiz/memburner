@@ -50,7 +50,7 @@ class Base(DeclarativeBase):
 
     __abstract__ = True
 
-    metadata = MetaData(naming_convention=settings.DATABASE_NAMING_CONVENTION)
+    metadata = MetaData(naming_convention=settings.database.naming_convention)
 
     id: Mapped[idpk]
     created_at: Mapped[datetime.datetime] = mapped_column(
