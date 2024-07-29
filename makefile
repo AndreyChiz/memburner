@@ -8,18 +8,19 @@ run_app:
 	./.venv/bin/python ./service/main.py
 
 
+
 migration_autogenerate:
-	alembic revision --autogenerate    
+	cd service && alembic revision --autogenerate 
 
 migration_upgrade_db:
-	alembic upgrade head
+	cd service && alembic upgrade head
 
 
 migration_downgrade_db:
-	alembic downgrade base
+	cd service && alembic downgrade base
 
 
 check_all:
-	alembic downgrade base
-	alembic upgrade head
-	python -m src.exam_service.crud
+	cd service && alembic downgrade base
+	cd service && alembic upgrade head
+	cd service && python -m src.exam_service.crud
