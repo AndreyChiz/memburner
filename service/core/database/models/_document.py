@@ -31,7 +31,7 @@ class Document(Base):
     """
 
     __table_args__ = (
-        UniqueConstraint("owner", "name", "code", name="document_owner_name_code_key"),
+        UniqueConstraint("owner", "name", "code", ),
     )
 
     owner: Mapped[str] = mapped_column(unique=False)
