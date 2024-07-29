@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 
 
 class Section(Base):
-
     """
     The :class:`Section` class within a document, containing related questions.
 
@@ -37,5 +36,5 @@ class Section(Base):
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     document_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("document.id"))
 
-    document: Mapped["Document"] = relationship(back_populates="sections")  
-    questions: Mapped[List["Question"]] = relationship(back_populates="section")  
+    document: Mapped["Document"] = relationship(back_populates="sections")
+    questions: Mapped[List["Question"]] = relationship(back_populates="section")

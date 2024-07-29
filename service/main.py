@@ -7,6 +7,7 @@ from api import root_api_router
 from config import settings
 from core.database import db_helper
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     yield
@@ -15,7 +16,6 @@ async def lifespan(app: FastAPI):
 
 main_app = FastAPI(
     lifespan=lifespan,
-    
 )
 main_app.include_router(
     root_api_router,
