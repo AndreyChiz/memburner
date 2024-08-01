@@ -1,4 +1,3 @@
-from fastapi import APIRouter
+__all__ = "document_router"
 
-router = APIRouter(tags=["Document"])
-
+from ._views import document_router

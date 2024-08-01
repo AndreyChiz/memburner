@@ -1,14 +1,19 @@
-from fastapi import Depends
+from fastapi import (
+    Depends,
+    APIRouter,
+)
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import db_master
 
-from . import router
 from ._schema import DocumentRead
 from ._crud import DocumentCRUD
 
+document_router = APIRouter(tags=["Document"])
 
-@router.get("", response_model=list[DocumentRead])
+
+@document_router.get("/", response_model=list[DocumentRead])
 async def get_documents(
     session: AsyncSession = Depends(db_master.session_getter),
 ):
