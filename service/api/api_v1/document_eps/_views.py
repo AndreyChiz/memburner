@@ -17,5 +17,5 @@ document_router = APIRouter(tags=["Document"])
 async def get_documents(
     session: AsyncSession = Depends(db_master.session_getter),
 ):
-    documents = await DocumentCRUD.get_all_documents(session=session)
+    documents = await DocumentCRUD.get_all_documents(session)
     return documents
