@@ -1,3 +1,3 @@
 __all__ = "db_helper"
 
-from ._db_helper import db_helper
+from ._db_master import db_master
