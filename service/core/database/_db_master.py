@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 from config import settings
 
 
-class DatabaseHelper:
+class DatabaseMaster:
     def __init__(
         self,
         url: str,
@@ -40,7 +40,7 @@ class DatabaseHelper:
             yield session
 
 
-db_master = DatabaseHelper(
+db_master = DatabaseMaster(
     url=settings.database.url,
     echo=settings.database.echo,
     echo_pool=settings.database.echo_pool,
