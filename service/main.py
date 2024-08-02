@@ -27,6 +27,8 @@ main_app.include_router(
 
 
 def custom_openapi():
+    """The bug with default server path overriding in openapi v3.2.0
+    needs to set to v3.0.0 by this function"""
     if main_app.openapi_schema:
         return main_app.openapi_schema
     openapi_schema = get_openapi(
