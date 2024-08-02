@@ -8,4 +8,3 @@ async def inspect_routes(app: FastAPI) -> None:
             print(f"Имя: {route.name}")
             if hasattr(route, "response_model"):
                 print(f"Модель ответа: {route.response_model}")
-            

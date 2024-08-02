@@ -15,16 +15,15 @@ from ._crud import DocumentCRUD
 document_router = APIRouter(
     prefix=settings.api.v1.prefix.document,
     tags=[settings.api.v1.tag.document],
-    
-       
 )
 
 
-@document_router.get("", response_model=list[DocumentRead], )
+@document_router.get(
+    "",
+    response_model=list[DocumentRead],
+)
 async def get_documents(
     session: Annotated[AsyncSession, Depends(db_master.session_getter)],
 ):
     documents = await DocumentCRUD.get_all_documents(session)
     return documents
-
-
