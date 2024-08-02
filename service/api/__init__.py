@@ -6,6 +6,5 @@ from .utils import inspect_routes
 __all__ = inspect_routes
 
 
-frst_api_router = APIRouter()
-
-frst_api_router.include_router(api_v1_router)
+root_api_router = APIRouter()
+root_api_router.include_router(api_v1_router)
