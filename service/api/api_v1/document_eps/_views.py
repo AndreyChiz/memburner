@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.database import db_master
 from config import settings
 
-from ._schema import DocumentRead
+from ._schema import DocumentRSP
 from ._crud import DocumentCRUD
 
 document_router = APIRouter(
@@ -20,7 +20,7 @@ document_router = APIRouter(
 
 @document_router.get(
     "",
-    response_model=list[DocumentRead],
+    response_model=list[DocumentRSP],
 )
 async def get_documents(
     session: Annotated[AsyncSession, Depends(db_master.session_getter)],
