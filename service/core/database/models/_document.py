@@ -1,5 +1,6 @@
 from typing import List, TYPE_CHECKING
 
+import uuid
 from sqlalchemy import String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ._base import Base
@@ -32,13 +33,12 @@ class Document(Base):
 
     __table_args__ = (
         UniqueConstraint(
-            "owner",
             "name",
             "code",
         ),
     )
 
-    owner: Mapped[str] = mapped_column(unique=False)
+    owner_user_id: Mapped[uuid.UUID] = mapped_column(unique=False)
     name: Mapped[str] = mapped_column(unique=False)
     code: Mapped[str | None] = mapped_column(String(100), unique=False)
     sections: Mapped[List["Section"]] = relationship(back_populates="document")
