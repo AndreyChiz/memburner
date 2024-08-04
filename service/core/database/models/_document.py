@@ -29,6 +29,9 @@ class Document(Base):
 
     :seealso: additional blank fields in :paramref:`exam_service.models._base.Base` parameter.
 
+    
+     
+
     """
 
     __table_args__ = (
@@ -48,3 +51,5 @@ class Document(Base):
 
     def __repr__(self):
         return str(self)
+    
+    
