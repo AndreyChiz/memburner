@@ -1,0 +1,21 @@
+### First Request
+POST http://0.0.0.0:8000/api/v1/document
+Accept: application/json
+Content-Type: application/json
+
+{
+  "owner_user_id": "b283af46-e02c-4a3a-b05b-a3776b806441",
+  "name": "War&Pice",
+  "code": "0.1"
+}
+
+### Second Request
+POST http://0.0.0.0:8000/api/v1/document
+Accept: application/json
+Content-Type: application/json
+
+{
+  "owner_user_id": "90d98938-81da-41a8-b239-1604bb406b64",
+  "name": "Tom Soyer",
+  "code": "Bar"
+}
