@@ -4,7 +4,7 @@ from typing import Sequence
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.database.models import Document
-from ._schema import DocumentBase
+from ._schema import DocumentBase, DocumentRSP
 
 
 class DocumentCRUD:
@@ -16,8 +16,8 @@ class DocumentCRUD:
 
     @staticmethod
     async def create_document(session: AsyncSession, document: DocumentBase):
-        document = document.model_dump()
+        document: Document = Document(**document.model_dump())
         session.add(document)
         await session.commit()
-        await session.refresh()
+        # await session.refresh()
         return document

@@ -9,7 +9,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.database import db_master
 from config import settings
 
-from ._schema import DocumentRSP
+from core.database.models import Document
+from ._schema import DocumentRSP, DocumentBase
 from ._crud import DocumentCRUD
 
 document_router = APIRouter(
@@ -27,3 +28,18 @@ async def get_documents(
 ):
     documents = await DocumentCRUD.get_all_documents(session)
     return documents
+
+
+@document_router.post(
+    "",
+    response_model=DocumentRSP,
+)
+async def create_document(
+    new_document: DocumentBase,
+    session: Annotated[AsyncSession, Depends(db_master.session_getter)],
+):
+   
+    responce = await DocumentCRUD.create_document(
+        session=session, document=new_document
+    )
+    return responce
