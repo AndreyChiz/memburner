@@ -10,7 +10,7 @@ run_app:
 
 
 migration_autogenerate:
-	cd service && alembic revision --autogenerate 
+	cd service && alembic revision -m "initial" --autogenerate 
 
 migration_upgrade_db:
 	cd service && alembic upgrade head
@@ -24,3 +24,4 @@ check_all:
 	cd service && alembic downgrade base
 	cd service && alembic upgrade head
 	cd service && python -m src.exam_service.crud
+
