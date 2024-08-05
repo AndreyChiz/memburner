@@ -29,13 +29,14 @@ class Document(Base):
 
     :seealso: additional blank fields in :paramref:`service.database.models._base.Base` parameter.
 
-    
-     
+
+
 
     """
 
     __table_args__ = (
         UniqueConstraint(
+            "owner_user_id",
             "name",
             "code",
         ),
@@ -51,5 +52,3 @@ class Document(Base):
 
     def __repr__(self):
         return str(self)
-    
-    
