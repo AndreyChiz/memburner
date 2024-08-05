@@ -28,26 +28,9 @@ def camel_case_to_snake_case(input_str: str) -> str:
 
 
 class Base(BaseMixin, DeclarativeBase):
-    """
-    The :class:`Base` class serves as the base class for all database models.
-
-    :param id:
-        The primary key of the model.
-        :seealso: `exam_service.models._base.idpk` for type of the all PrimaryKeys
-    :type id: idpk
-
-    :param created_at:
-        The timestamp when the instance was created.
-    :type created_at: datetime.datetime
-
-    :param updated_at:
-        The timestamp when the instance was last updated.
-    :type updated_at: datetime.datetime | None
-
-    """
 
     __abstract__ = True
-    __include_id__ = True
+    
     
 
     metadata = MetaData(naming_convention=settings.database.naming_convention)

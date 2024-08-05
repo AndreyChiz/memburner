@@ -10,26 +10,7 @@ if TYPE_CHECKING:
 
 
 class Document(Base):
-    """The :class:`Document` class stores information about the name and code of the document for which the tests are compiled.
-    Including its unique name, code, and associated sections.
-
-    :param name:
-     The name of the document is unique. It may be the title of a book or the name of a standard, etc
-    :type name:
-     str
-
-    :param code:
-     Document code or designation, such as a book's "ISBN..." or standard designation such as "ISO..."
-    :type name:
-     str
-
-    :ivar sections:
-    The list of sections that the document contains
-    :vartype List[Section]
-
-    :seealso: additional blank fields in :paramref:`service.database.models._base.Base` parameter.
-
-    """
+    __include_id__ = True
     __include_created_at__ = True
     __include_updated_at__ = True
 
