@@ -6,8 +6,6 @@
 run_db_conatainer:
 	docker-compose up -d
 
-
-
 migration_upgrade_db:
 	cd service && alembic upgrade head
 
