@@ -27,7 +27,7 @@ class Document(Base):
     The list of sections that the document contains
     :vartype List[Section]
 
-    :seealso: additional blank fields in :paramref:`exam_service.models._base.Base` parameter.
+    :seealso: additional blank fields in :paramref:`service.database.models._base.Base` parameter.
 
     
      
