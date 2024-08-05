@@ -140,3 +140,4 @@ backup.dump.gz
 
 
 *.ipynb
+*.tmp
