@@ -29,10 +29,9 @@ class Document(Base):
 
     :seealso: additional blank fields in :paramref:`service.database.models._base.Base` parameter.
 
-
-
-
     """
+    __include_created_at__ = True
+    __include_updated_at__ = True
 
     __table_args__ = (
         UniqueConstraint(

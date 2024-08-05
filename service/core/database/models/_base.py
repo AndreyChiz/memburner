@@ -1,16 +1,14 @@
-import uuid
 import datetime
 
+from typing import Any
+
 from sqlalchemy import text, event, DateTime, func, MetaData
-from sqlalchemy.dialects.postgresql import UUID as types_Uuid
+
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Mapped, mapped_column
-from typing import Any, Annotated
+
+
 from config import settings
-
-
-idpk = Annotated[
-    uuid.UUID, mapped_column(primary_key=True, server_default=text("gen_random_uuid()"))
-]
+from .__mixin import BaseMixin
 
 
 def camel_case_to_snake_case(input_str: str) -> str:
@@ -29,7 +27,7 @@ def camel_case_to_snake_case(input_str: str) -> str:
     return "".join(chars)
 
 
-class Base(DeclarativeBase):
+class Base(BaseMixin, DeclarativeBase):
     """
     The :class:`Base` class serves as the base class for all database models.
 
@@ -49,19 +47,11 @@ class Base(DeclarativeBase):
     """
 
     __abstract__ = True
+    __include_id__ = True
+    
 
     metadata = MetaData(naming_convention=settings.database.naming_convention)
 
-    id: Mapped[idpk]
-    created_at: Mapped[datetime.datetime] = mapped_column(
-        nullable=False,
-        server_default=func.CURRENT_TIMESTAMP(),
-        type_=DateTime(timezone=True),
-    )
-    updated_at: Mapped[datetime.datetime | None] = mapped_column(
-        server_default=None,
-        server_onupdate=func.CURRENT_TIMESTAMP(),
-    )
 
     @declared_attr
     def __tablename__(cls) -> str:

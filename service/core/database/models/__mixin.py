@@ -16,6 +16,9 @@ from sqlalchemy.ext.declarative import declared_attr
 
 
 class BaseMixin:
+    __include_id__: bool = False
+    __include_created_at__: bool = False
+    __include_updated_at__: bool = False
 
     @declared_attr
     def id(cls) -> Mapped[uuid.UUID]:
