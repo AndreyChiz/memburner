@@ -5,7 +5,7 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.responses import ORJSONResponse
 
 from api import root_api_router
-
+from api.middlewares import LogRequestsMiddleware
 from config import settings
 from core.database import db_master
 
@@ -23,6 +23,10 @@ main_app = FastAPI(
 main_app.include_router(
     root_api_router,
     prefix=settings.api.prefix,
+)
+
+main_app.add_middleware(
+    LogRequestsMiddleware,
 )
 
 

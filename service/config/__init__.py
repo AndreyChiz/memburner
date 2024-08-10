@@ -1,9 +1,12 @@
+__all__ = "logger"
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 from ._api_config import ApiConfig
 from ._run_config import RunConfig
 from ._db_config import DatabaseConfig
+from ._logger_config import logger
 
 
 class Settings(BaseSettings):

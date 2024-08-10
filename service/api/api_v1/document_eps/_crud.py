@@ -7,7 +7,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.database.models import Document
 from ._schema import DocumentBase, DocumentRSP
-import logging
+from config import logger
+
 
 class DocumentCRUD:
     @staticmethod
@@ -20,10 +21,10 @@ class DocumentCRUD:
     async def create_document(session: AsyncSession, document: DocumentBase):
         document: Document = Document(**document.model_dump())
         session.add(document)
-        try: 
+        try:
             await session.commit()
         except IntegrityError as e:
-            print(
+            logger.error(
                 str(e.orig).split("DETAIL:")[1],
             )
             raise HTTPException(status_code=400, detail=str(e))
