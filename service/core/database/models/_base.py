@@ -30,11 +30,8 @@ def camel_case_to_snake_case(input_str: str) -> str:
 class Base(BaseMixin, DeclarativeBase):
 
     __abstract__ = True
-    
-    
 
     metadata = MetaData(naming_convention=settings.database.naming_convention)
-
 
     @declared_attr
     def __tablename__(cls) -> str:

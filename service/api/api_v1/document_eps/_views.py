@@ -38,7 +38,7 @@ async def create_document(
     new_document: DocumentBase,
     session: Annotated[AsyncSession, Depends(db_master.session_getter)],
 ):
-   
+
     responce = await DocumentCRUD.create_document(
         session=session, document=new_document
     )

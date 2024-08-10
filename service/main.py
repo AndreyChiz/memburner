@@ -1,5 +1,3 @@
-
-
 import uvicorn
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
@@ -10,8 +8,6 @@ from api import root_api_router
 
 from config import settings
 from core.database import db_master
-
-
 
 
 @asynccontextmanager
