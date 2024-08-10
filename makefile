@@ -10,6 +10,7 @@ migration_upgrade_db:
 	cd service && alembic upgrade head
 
 run_app:
+	find . -type d -name '__pycache__' -exec rm -r {} + && \
 	export PYTHONDONTWRITEBYTECODE=1 && \
 	 ./.venv/bin/python ./service/main.py
 
@@ -31,3 +32,4 @@ check_all:
 
 clear_pycache:
 	export PYTHONDONTWRITEBYTECODE=1
+	find . -type d -name '__pycache__' -exec rm -r {} + 
