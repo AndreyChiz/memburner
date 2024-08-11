@@ -6,10 +6,8 @@ import json
 import os
 from context_vars import request_id_var
 
-# from typing import TYPE_CHECKING
-
-# if TYPE_CHECKING:
-#     from config._logger_config import LoggerConfig
+# template:
+# https://medium.com/1mgofficial/how-to-override-uvicorn-logger-in-fastapi-using-loguru-124133cdcd4e
 
 
 class InterceptHandler(logging.Handler):
