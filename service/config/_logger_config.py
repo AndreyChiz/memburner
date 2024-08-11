@@ -26,16 +26,17 @@ os.makedirs(log_path, exist_ok=True)
 
 logger.add(
     sys.stdout,
-    format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}",
+    format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {extra} | {message} |",
     level="INFO",
     colorize=True,
+
 )
 logger.add(
     os.path.join(log_path, "app_{time:YYYY-MM-DD}.log"),
     rotation="500 MB",  # Ротация по размеру
     retention="10 days",  # Удаление логов старше 10 дней
     compression="zip",  # Архивирование логов
-    format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {module} | {message} | {extra}",
+    format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {extra} | {message} | ",
     level="ERROR",
     enqueue=True,  # Асинхронная запись в файл
     colorize=True,

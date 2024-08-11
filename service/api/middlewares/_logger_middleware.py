@@ -22,11 +22,11 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
             body = await request.json()
             request_info["body"] = body
         except Exception:
-            request_info["body"] = "Не удалось декодировать тело запроса как JSON."
+            request_info["body"] = "invalid  JSON in request."
 
         # Логируем начало обработки
         logger.bind(request_id=request_id).info(
-            f"Начало обработки: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
+            f"REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
         )
 
         # Выполняем основной запрос и перехватываем ответ
@@ -58,7 +58,7 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
                 decoded_body = json.loads(response_body)
                 response_info["body"] = decoded_body
             except json.JSONDecodeError:
-                response_info["body"] = "Ответ содержит некорректный JSON."
+                response_info["body"] = "invalid  JSON in response."
         else:
             response_info["body"] = (
                 response_body.decode("utf-8") if response_body else "Пустое тело ответа"
@@ -66,13 +66,12 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
 
         # Логируем завершение обработки
         logger.bind(request_id=request_id).info(
-            f"Завершение обработки: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
+            f"RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
         )
         if response.status_code != 200:
             logger.bind(request_id=request_id).error(
-                "\n" 
+                "\n"
                 f"ERROR_REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
                 f"ERROR_RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
             )
         return response
-
