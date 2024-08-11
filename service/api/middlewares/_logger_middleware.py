@@ -17,27 +17,21 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
             "client": str(request.client.host),
         }
 
-        # Пытаемся извлечь тело запроса
+
         try:
             body = await request.json()
             request_info["body"] = body
         except Exception:
             request_info["body"] = "invalid  JSON in request."
 
-        # Логируем начало обработки
-        logger.bind(request_id=request_id).info(
-            f"REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
-        )
-
-        # Выполняем основной запрос и перехватываем ответ
         response = await call_next(request)
 
-        # Чтение тела ответа
+
         response_body = b""
         async for chunk in response.body_iterator:
             response_body += chunk
 
-        # Запись тела в response обратно
+
         response = Response(
             content=response_body,
             status_code=response.status_code,
@@ -65,13 +59,19 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
             )
 
         # Логируем завершение обработки
-        logger.bind(request_id=request_id).info(
-            f"RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
-        )
+
         if response.status_code != 200:
             logger.bind(request_id=request_id).error(
                 "\n"
                 f"ERROR_REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
                 f"ERROR_RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
             )
+
+        else:
+            logger.bind(request_id=request_id).info(
+                "\n"
+                f"REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
+                f"RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
+            )
+
         return response

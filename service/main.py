@@ -52,5 +52,11 @@ main_app.openapi = custom_openapi
 if __name__ == "__main__":
 
     uvicorn.run(
-        "main:main_app", host=settings.run.host, port=settings.run.port, reload=True
+        "main:main_app",
+        host=settings.run.host,
+        port=settings.run.port,
+        reload=True,
+        # log_config=None,  # Отключить конфигурацию логов Uvicorn
+        # access_log=False,  # Отключить access log
+        # use_colors=False,
     )
