@@ -4,6 +4,7 @@ from fastapi import Request, Response
 from datetime import datetime
 import json
 
+
 class LogRequestsMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         request_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
@@ -23,34 +24,55 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
         except Exception:
             request_info["body"] = "Не удалось декодировать тело запроса как JSON."
 
-        # Логируем запрос
+        # Логируем начало обработки
         logger.bind(request_id=request_id).info(
             f"Начало обработки: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
         )
 
-        # Выполняем основной запрос и получаем ответ
-        response: Response = await call_next(request)
+        # Выполняем основной запрос и перехватываем ответ
+        response = await call_next(request)
+
+        # Чтение тела ответа
+        response_body = b""
+        async for chunk in response.body_iterator:
+            response_body += chunk
+
+        # Запись тела в response обратно
+        response = Response(
+            content=response_body,
+            status_code=response.status_code,
+            headers=dict(response.headers),  # Сохраняем все заголовки ответа
+            media_type=response.media_type,
+        )
 
         # Сбор информации об ответе
         response_info = {
             "status_code": response.status_code,
-            "headers": dict(response.headers),
+            "headers": dict(response.headers),  # Добавляем все заголовки ответа
         }
 
-        # Пытаемся извлечь тело ответа
+        # Логируем тело ответа, если оно JSON
         if response.media_type == "application/json":
             try:
-                response_body = response.body.decode('utf-8')
-                response_info["body"] = json.loads(response_body)
-            except Exception:
-                response_info["body"] = "Не удалось декодировать тело ответа как JSON."
+                # Попытка декодировать JSON тело ответа
+                decoded_body = json.loads(response_body)
+                response_info["body"] = decoded_body
+            except json.JSONDecodeError:
+                response_info["body"] = "Ответ содержит некорректный JSON."
         else:
-            response_info["body"] = "Ответ не является JSON."
+            response_info["body"] = (
+                response_body.decode("utf-8") if response_body else "Пустое тело ответа"
+            )
 
-        # Логируем ответ
+        # Логируем завершение обработки
         logger.bind(request_id=request_id).info(
             f"Завершение обработки: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
         )
-
+        if response.status_code != 200:
+            logger.bind(request_id=request_id).error(
+                "\n" 
+                f"ERROR_REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
+                f"ERROR_RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
+            )
         return response
 

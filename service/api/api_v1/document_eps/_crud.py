@@ -24,9 +24,9 @@ class DocumentCRUD:
         try:
             await session.commit()
         except IntegrityError as e:
-            logger.error(
-                str(e.orig).split("DETAIL:")[1],
-            )
+            # logger.error(
+            #     str(e.orig)
+            # )
             raise HTTPException(status_code=400, detail=str(e))
         # await session.refresh()
         return document

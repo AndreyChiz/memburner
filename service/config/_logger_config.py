@@ -36,8 +36,9 @@ logger.add(
     retention="10 days",  # Удаление логов старше 10 дней
     compression="zip",  # Архивирование логов
     format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {module} | {message} | {extra}",
-    level="INFO",
+    level="ERROR",
     enqueue=True,  # Асинхронная запись в файл
+    colorize=True,
 )
 
 # logger.add(lambda msg: sentry_sdk.capture_message(msg), level="ERROR")

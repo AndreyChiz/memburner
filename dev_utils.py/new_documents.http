@@ -28,5 +28,5 @@ Content-Type: application/json
 {
   "owner_user_id": "809abc00-c847-4979-9fc5-ebf1cb9a3069",
   "name": "Tom Soyer",
-  "code": "Bar"
+  "code": 1
 }
