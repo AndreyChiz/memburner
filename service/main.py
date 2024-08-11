@@ -8,6 +8,7 @@ from api import root_api_router
 from api.middlewares import LogRequestsMiddleware
 from config import settings
 from core.database import db_master
+from logger import CustomLogger
 
 
 @asynccontextmanager
@@ -19,11 +20,17 @@ async def lifespan(app: FastAPI):
 main_app = FastAPI(
     default_response_class=ORJSONResponse,
     lifespan=lifespan,
+    
 )
+
+logger = CustomLogger.make_logger(**settings.logger.model_dump())
+main_app.logger = logger
+
 main_app.include_router(
     root_api_router,
     prefix=settings.api.prefix,
 )
+
 
 main_app.add_middleware(
     LogRequestsMiddleware,

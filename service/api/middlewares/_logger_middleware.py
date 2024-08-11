@@ -1,15 +1,21 @@
+from contextvars import ContextVar
+from datetime import datetime
+import json
+
 from starlette.middleware.base import BaseHTTPMiddleware
 from loguru import logger
 from fastapi import Request, Response
-from datetime import datetime
-import json
+from context_vars import request_id_var
+
+
 
 
 class LogRequestsMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         request_id = datetime.now().strftime("%Y%m%d%H%M%S%f")
+        request_id_var.set(request_id)
 
-        # Сбор информации о запросе
+
         request_info = {
             "method": request.method,
             "url": str(request.url),
