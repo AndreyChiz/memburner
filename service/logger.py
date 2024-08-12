@@ -45,6 +45,7 @@ class CustomLogger:
         rotation: str,
         retention: str,
         log_format: str,
+        compression: str,
     ):
 
         os.makedirs(path, exist_ok=True)
@@ -68,6 +69,7 @@ class CustomLogger:
             backtrace=True,
             level=level.upper(),
             format=log_format,
+            compression=compression,
         )
         logging.basicConfig(handlers=[InterceptHandler()], level=0)
         logging.getLogger("uvicorn.access").handlers = [InterceptHandler()]

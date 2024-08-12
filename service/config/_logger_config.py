@@ -8,3 +8,4 @@ class LoggerConfig(BaseModel):
     rotation: str
     retention: str
     log_format: str
+    compression: str
