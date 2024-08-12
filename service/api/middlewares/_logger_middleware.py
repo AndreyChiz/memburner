@@ -73,11 +73,11 @@ class LogRequestsMiddleware(BaseHTTPMiddleware):
                 f"ERROR_RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
             )
 
-        else:
-            logger.bind(request_id=request_id).info(
-                "\n"
-                f"REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
-                f"RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
-            )
+        # else:
+        #     logger.bind(request_id=request_id).info(
+        #         "\n"
+        #         f"REQUEST: {json.dumps(request_info, ensure_ascii=False, indent=4)}"
+        #         f"RESPONSE: {json.dumps(response_info, ensure_ascii=False, indent=4)}"
+        #     )
 
         return response
