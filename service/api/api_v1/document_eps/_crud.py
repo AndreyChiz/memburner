@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.database.models import Document
 from ._schema import DocumentBase, DocumentRSP
-
+from ..exceptions import DocumentAlreadyExistsException
 
 
 class DocumentCRUD:
@@ -24,6 +24,6 @@ class DocumentCRUD:
         try:
             await session.commit()
         except IntegrityError as e:
-            raise HTTPException(status_code=400, detail=str(e))
-        # await session.refresh()
+            raise DocumentAlreadyExistsException
+                # await session.refresh()
         return document

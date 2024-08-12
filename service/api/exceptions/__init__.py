@@ -1,3 +1,6 @@
-__ALL__ = "DetailedHTTPException"
+__ALL__ = (
+    "NotFoundException",
+    "BadRequestException",
+)
 
-from._base_api_exceptions import DetailedHTTPException
+from ._base_api_exceptions import NotFoundException, BadRequestException

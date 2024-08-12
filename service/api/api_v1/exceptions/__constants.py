@@ -1,11 +1,10 @@
 class DocumentExceptionDetails:
     NOT_FOUND = "Document not found"
-    ALREADY_EXIST= "This user already haves a document with this name"
+    ALREADY_EXIST = f"document with such owner_user_id, name, code already exists, try another name or code"
 
 
 class ApiV1ExceptionDetails:
     document: DocumentExceptionDetails = DocumentExceptionDetails()
-
 
     # DOCUMENT_NOT_FOUND = "Document not found"
     # SECTION_NOT_FOUND = "Section not found"
