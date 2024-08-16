@@ -13,10 +13,7 @@ from core.database.models import Document
 from ._schema import DocumentRSP, DocumentBase
 from ._crud import DocumentCRUD
 
-document_router = APIRouter(
-    prefix=settings.api.v1.prefix.document,
-    tags=[settings.api.v1.tag.document],
-)
+document_router = APIRouter()
 
 
 @document_router.get(

@@ -3,8 +3,20 @@ class DocumentExceptionDetails:
     ALREADY_EXIST = f"document with such owner_user_id, name, code already exists, try another name or code"
 
 
+class QuestionExceptionDetails:
+    NOT_FOUND = "Question not found"
+    ALREADY_EXIST = f"question with such owner_user_id, name, code already exists, try another name or code"
+
+
+class SectionExceptionDetails:
+    NOT_FOUND = "Section not found"
+    ALREADY_EXIST = f"section with such owner_user_id, name, code already exists, try another name or code"
+
+
 class ApiV1ExceptionDetails:
     document: DocumentExceptionDetails = DocumentExceptionDetails()
+    section: SectionExceptionDetails = SectionExceptionDetails()
+    question: QuestionExceptionDetails = QuestionExceptionDetails()
 
     # DOCUMENT_NOT_FOUND = "Document not found"
     # SECTION_NOT_FOUND = "Section not found"
