@@ -20,7 +20,6 @@ async def lifespan(app: FastAPI):
 main_app = FastAPI(
     default_response_class=ORJSONResponse,
     lifespan=lifespan,
-    
 )
 
 logger = CustomLogger.make_logger(**settings.logger.model_dump())
