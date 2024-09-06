@@ -1,4 +1,4 @@
-.PHONY: examination_service_dev_comands
+.PHONY: examination_application_dev_comands
 
 #---------------install---------------
 
@@ -7,28 +7,28 @@ run_db_conatainer:
 	docker-compose up -d
 
 migration_upgrade_db:
-	cd service && alembic upgrade head
+	cd application && alembic upgrade head
 
 run_app:
 	find . -type d -name '__pycache__' -exec rm -r {} + && \
 	export PYTHONDONTWRITEBYTECODE=1 && \
-	 ./.venv/bin/python ./service/main.py
+	 ./.venv/bin/python ./application/main.py
 
 # ----------------dev-----------------
 
 migration_autogenerate:
-	cd service && alembic revision -m "initial" --autogenerate 
+	cd application && alembic revision -m "initial" --autogenerate 
 
 
 
 migration_downgrade_db:
-	cd service && alembic downgrade base
+	cd application && alembic downgrade base
 
 
 check_all:
-	cd service && alembic downgrade base
-	cd service && alembic upgrade head
-	cd service && python -m src.exam_service.crud
+	cd application && alembic downgrade base
+	cd application && alembic upgrade head
+	cd application && python -m src.exam_application.crud
 
 clear_pycache:
 	export PYTHONDONTWRITEBYTECODE=1

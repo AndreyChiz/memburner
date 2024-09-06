@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.database.models import Document
 from ._schema import DocumentBase, DocumentRSP
-from ..exceptions import DocumentAlreadyExistsException
+from .._exceptions import DocumentAlreadyExistsException
 
 
 class DocumentCRUD:

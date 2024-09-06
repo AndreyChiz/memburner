@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.database.models import Question
 from ._schema import QuestionBase, QuestionRSP
-from ..exceptions import QuestionAlreadyExistsException
+from .._exceptions import QuestionAlreadyExistsException
 
 
 class QuestionCRUD:

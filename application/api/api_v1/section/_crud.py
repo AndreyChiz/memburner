@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.database.models import Section
 from ._schema import SectionBase, SectionRSP
-from ..exceptions import SectionAlreadyExistsException
+from .._exceptions import SectionAlreadyExistsException
 
 
 class SectionCRUD:
