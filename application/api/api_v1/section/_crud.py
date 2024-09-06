@@ -1,4 +1,5 @@
 from typing import Sequence
+import uuid
 
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException
@@ -12,8 +13,17 @@ from .._exceptions import SectionAlreadyExistsException
 
 class SectionCRUD:
     @staticmethod
-    async def get_all_sections(session: AsyncSession) -> Sequence[Section]:
-        stmt = select(Section).order_by(Section.id)
+    async def get_all_sections(
+        session: AsyncSession, document_id: uuid.UUID
+    ) -> Sequence[Section]:
+
+        # TODO: добавить пагинацию, в запросе схема DocumentRSP, очереднсоть выборки id,code,name
+
+        stmt = (
+            select(Section)
+            .where(Section.document_id == document_id)
+            .order_by(Section.id)
+        )
         result = await session.scalars(stmt)
         return result.all()
 
@@ -25,5 +35,5 @@ class SectionCRUD:
             await session.commit()
         except IntegrityError as e:
             raise SectionAlreadyExistsException
-                # await session.refresh()
+            # await session.refresh()
         return section

@@ -25,5 +25,4 @@ class DocumentCRUD:
             await session.commit()
         except IntegrityError as e:
             raise DocumentAlreadyExistsException
-                # await session.refresh()
         return document
