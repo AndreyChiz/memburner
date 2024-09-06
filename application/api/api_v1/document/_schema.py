@@ -2,7 +2,7 @@ import uuid
 from typing import Annotated
 
 
-from pydantic import BaseModel, ConfigDict, constr
+from pydantic import BaseModel, ConfigDict, constr, Field
 
 
 class DocumentBase(BaseModel):
@@ -13,5 +13,5 @@ class DocumentBase(BaseModel):
 
 class DocumentRSP(DocumentBase):
     id: uuid.UUID
-
+    owner_user_id: uuid.UUID = Field(exclude=True)
     model_config = ConfigDict(title="Document response model schema ")
