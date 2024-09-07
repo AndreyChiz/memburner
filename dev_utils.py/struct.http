@@ -1,0 +1,163 @@
+### Создание пользователя
+POST http://localhost:8000/api/v1/user
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "securepassword123"
+}
+
+### Получение информации о пользователе
+GET http://localhost:8000/api/v1/user/{user_id}
+
+### Обновление пользователя
+PUT http://localhost:8000/api/v1/user/{user_id}
+Content-Type: application/json
+
+{
+  "email": "john.doe@newemail.com"
+}
+
+### Удаление пользователя
+DELETE http://localhost:8000/api/v1/user/{user_id}
+
+### Получение всех документов пользователя
+GET http://localhost:8000/api/v1/user/{user_id}/document
+
+### Создание документа
+POST http://localhost:8000/api/v1/user/{user_id}/document
+Content-Type: application/json
+
+{
+  "name": "War&Pice",
+  "code": "0.1"
+}
+
+### Получение конкретного документа
+GET http://localhost:8000/api/v1/user/{user_id}/document/{document_id}
+
+### Обновление документа
+PUT http://localhost:8000/api/v1/user/{user_id}/document/{document_id}
+Content-Type: application/json
+
+{
+  "name": "War and Peace",
+  "code": "0.2"
+}
+
+### Удаление документа
+DELETE http://localhost:8000/api/v1/user/{user_id}/document/{document_id}
+
+### Получение всех разделов документа
+GET http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section
+
+### Создание раздела
+POST http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section
+Content-Type: application/json
+
+{
+  "name": "Chapter 1",
+  "code": "ch1",
+  "content": "In the beginning..."
+}
+
+### Получение конкретного раздела
+GET http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}
+
+### Обновление раздела
+PUT http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}
+Content-Type: application/json
+
+{
+  "name": "Chapter 1: The Beginning",
+  "content": "In the beginning, there was..."
+}
+
+### Удаление раздела
+DELETE http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}
+
+### Получение всех вопросов раздела
+GET http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question
+
+### Создание вопроса
+POST http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question
+Content-Type: application/json
+
+{
+  "quest_text": "Who is the main character?",
+  "answers": ["Tom", "Huck", "Becky", "Aunt Polly"],
+  "number_in_chapter": 1,
+  "code": "q001"
+}
+
+### Получение конкретного вопроса
+GET http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question/{question_id}
+
+### Обновление вопроса
+PUT http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question/{question_id}
+Content-Type: application/json
+
+{
+  "quest_text": "Who is the protagonist?",
+  "answers": ["Tom Sawyer", "Huckleberry Finn", "Becky Thatcher", "Aunt Polly"]
+}
+
+### Удаление вопроса
+DELETE http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question/{question_id}
+
+### Отправка ответа на вопрос
+POST http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question/{question_id}/answer
+Content-Type: application/json
+
+{
+  "answer": "Tom Sawyer"
+}
+
+### Получение правильного ответа на вопрос
+GET http://localhost:8000/api/v1/user/{user_id}/document/{document_id}/section/{section_id}/question/{question_id}/answer
+
+### Создание теста
+POST http://localhost:8000/api/v1/user/{user_id}/test
+Content-Type: application/json
+
+{
+  "name": "Tom Sawyer Comprehension Test",
+  "document_id": "{document_id}",
+  "questions": ["{question_id1}", "{question_id2}"]
+}
+
+### Получение информации о тесте
+GET http://localhost:8000/api/v1/user/{user_id}/test/{test_id}
+
+### Обновление теста
+PUT http://localhost:8000/api/v1/user/{user_id}/test/{test_id}
+Content-Type: application/json
+
+{
+  "name": "Advanced Tom Sawyer Comprehension Test"
+}
+
+### Удаление теста
+DELETE http://localhost:8000/api/v1/user/{user_id}/test/{test_id}
+
+### Начало прохождения теста
+POST http://localhost:8000/api/v1/user/{user_id}/test/{test_id}/start
+
+### Отправка ответов на тест
+POST http://localhost:8000/api/v1/user/{user_id}/test/{test_id}/submit
+Content-Type: application/json
+
+{
+  "test_session_id": "{test_session_id}",
+  "answers": [
+    {"question_id": "{question_id1}", "answer": "Tom Sawyer"},
+    {"question_id": "{question_id2}", "answer": "St. Petersburg"}
+  ]
+}
+
+### Получение результатов всех тестов пользователя
+GET http://localhost:8000/api/v1/user/{user_id}/result
+
+### Получение результата конкретного теста
+GET http://localhost:8000/api/v1/user/{user_id}/result/{test_id}
