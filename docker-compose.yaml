@@ -1,4 +1,4 @@
-version: '3.8'
+
 
 services:
   postgres:
@@ -61,14 +61,30 @@ services:
       - memoburner_docker_networks
 
   additional_service:
-    container_name: additional_service_container
-    image: "python:3.13.0-alpine3.20" 
+    container_name: memburner_api
+    image: "python:3.12.7-alpine3.20" 
     env_file:
-      - path: .env  # Загружаем переменные из .env файла
+      - path: .env 
     #command: sh -c "mkdir -p /application && sh"  # Создаем папку и удерживаем контейнер активным
-    command: ["sh", "-c", "mkdir -p /application && sleep infinity"]
+    command: |
+              sh -c "mkdir -p /application && 
+              echo 'Setting up application...' && 
+              cd application &&
+              python3 -m venv .venv &&
+              . .venv/bin/activate &&
+              pip install update pip &&
+              pip install --upgrade pip &&
+              pip install poetry &&
+              poetry install
+              echo 'environment build, is ok, continue breathing' &&
+
+              python3 main.py"
+            # && sleep infinity &&
+            # echo 'не сработало'"
     volumes:
-      - ./application:/application  # Монтируем папку на хосте в контейнер
+      - ./application:/application  
+    ports:
+      - "8008:${APP_CONFIG__RUN__PORT}"
     networks:
       - memoburner_docker_networks
     restart: unless-stopped
