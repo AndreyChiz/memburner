@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     app_name: str
     model_config = SettingsConfigDict(
         case_sensitive=False,
-        env_file=(".env.template", ".env"),
+       #env_file=(".env.template", ".env"),
         env_prefix="APP_CONFIG__",
         env_nested_delimiter="__",
     )
