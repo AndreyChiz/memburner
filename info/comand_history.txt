@@ -1,7 +1,36 @@
 #Создать ключ ssh по указанному пути
 ssh-keygen -t ed25519 -C "git_hub_memburner" -f /home/www/.ssh/id_ed25519_memburner_github_24_10_31 -N "1"
 
-#Запустить ssh-agent
-eval "$(ssh-agent -s)"
-# Добавление ключа в агент
-ssh-add /home/www/.ssh/id_ed25519_memburner_github_24_10_31  
+
+#Обновление приложения (ключ прописывается только на сеанс)
+	#Запустить ssh-agent
+	eval "$(ssh-agent -s)"
+	# Добавление ключа в агент
+	ssh-add /home/www/.ssh/id_ed25519_memburner_github_24_10_31  
+
+#Включение сервиса ssh-agent и постоянное использование ключа
+
+	sudo nano /etc/systemd/system/ssh-agent.service
+
+	```
+	[Unit]
+	Description=SSH key agent
+
+	[Service]
+	Type=simple
+	ExecStart=/usr/bin/ssh-agent /bin/sh -c 'while true; do sleep 1; done'
+	Environment=SSH_AUTH_SOCK=/run/user/%U/ssh-auth.sock
+	Restart=always
+
+	[Install]
+	WantedBy=default.target
+	```
+    
+    #запуск + автозагрузка сервиса
+
+	nano ~/.ssh/config
+
+	```
+	Host github.com
+    IdentityFile /home/www/.ssh/id_ed25519_memburner_github_24_10_31
+    ```

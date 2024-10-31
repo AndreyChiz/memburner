@@ -1,10 +1,11 @@
+version: '3.8'
 
 services:
   postgres:
     container_name: memburner_database
     image: postgres:16-alpine3.19
     env_file:
-      - .env
+      - path: .env
     command:
       - "postgres"
       - "-c"
@@ -54,12 +55,24 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
+          cpus: '2'
           memory: 4G
     networks:
       - memoburner_docker_networks
 
+  additional_service:
+    container_name: additional_service_container
+    image: "python:3.13.0-alpine3.20" 
+    env_file:
+      - path: .env  # Загружаем переменные из .env файла
+    #command: sh -c "mkdir -p /application && sh"  # Создаем папку и удерживаем контейнер активным
+    command: ["sh", "-c", "mkdir -p /application && sleep infinity"]
+    volumes:
+      - ./application:/application  # Монтируем папку на хосте в контейнер
+    networks:
+      - memoburner_docker_networks
+    restart: unless-stopped
+
 networks:
   memoburner_docker_networks:
     driver: bridge
-
