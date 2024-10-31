@@ -141,3 +141,5 @@ backup.dump.gz
 
 *.ipynb
 *.tmp
+/db-volume
+/db-data
