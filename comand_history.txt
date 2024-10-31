@@ -1,0 +1,7 @@
+#Создать ключ ssh по указанному пути
+ssh-keygen -t ed25519 -C "git_hub_memburner" -f /home/www/.ssh/id_ed25519_memburner_github_24_10_31 -N "1"
+
+#Запустить ssh-agent
+eval "$(ssh-agent -s)"
+# Добавление ключа в агент
+ssh-add /home/www/.ssh/id_ed25519_memburner_github_24_10_31  

@@ -1,0 +1,1 @@
+1. Create user model, think about needed fields
