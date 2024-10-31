@@ -6,6 +6,10 @@
 run_db_conatainer:
 	docker-compose up -d
 
+# dont forget about .env file
+restart_db_conatainer:
+	docker-compose up --no-recreate
+
 migration_upgrade_db:
 	cd application && alembic upgrade head
 
