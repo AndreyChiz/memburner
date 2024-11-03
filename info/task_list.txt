@@ -1,4 +1,4 @@
-1. Create user model, think about needed fields
-2. Добавить в docker-compose создание контейнера "memburner_app_python3.12" python3.12
-	2.1 Внутри контейнера создать папку /application, вынести её в корень проекта *root/
+~1. Create user model, think about needed fields
++2. Добавить в docker-compose создание контейнера "memburner_app_python3.12" python3.12 
++	2.1 Внутри контейнера создать папку /application, вынести её в корень проекта *root/
 	2.2 Внутри контейнера создать папку /var/log/memburner/ вынести ее в корень проекта *root/logs
