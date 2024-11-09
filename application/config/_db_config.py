@@ -2,8 +2,8 @@ from pydantic import BaseModel, PostgresDsn
 
 
 class DatabaseConfig(BaseModel):
-    host: str
-    port: int
+    host: str = "memburner_db"
+    port: int = 5432
     name: str
     user: str
     password: str

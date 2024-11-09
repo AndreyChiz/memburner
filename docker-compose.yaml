@@ -2,7 +2,7 @@
 
 services:
   postgres:
-    container_name: memburner_database
+    container_name: memburner_db
     image: postgres:16-alpine3.19
     env_file:
       - path: .env
@@ -44,7 +44,7 @@ services:
     volumes:
       - ./db-docker-volume:/var/lib/postgresql/data
     ports:
-      - "${APP_CONFIG__DATABASE__PORT}:5432"
+      - "${APP_CONFIG__DATABASE__EXTERNAL_PORT}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${APP_CONFIG__DATABASE__USER} -d ${APP_CONFIG__DATABASE__NAME}"]
       interval: 10s
@@ -60,7 +60,7 @@ services:
     networks:
       - memoburner_docker_networks
 
-  additional_service:
+  application:
     container_name: memburner_api
     image: "python:3.12.7-alpine3.20" 
     env_file:
