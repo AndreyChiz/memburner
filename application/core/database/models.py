@@ -12,6 +12,7 @@ from .base_model import Base
 
 
 class Document(Base):
+    
     __include_id__ = True
     __include_created_at__ = True
     __include_updated_at__ = True
@@ -24,9 +25,10 @@ class Document(Base):
         ),
     )
 
-    owner_user_id: Mapped[uuid.UUID] = mapped_column(unique=False)
-    name: Mapped[str] = mapped_column(unique=False)
-    code: Mapped[str | None] = mapped_column(String(100), unique=False)
+    owner_user_id: Mapped[uuid.UUID] 
+    name: Mapped[str] 
+    code: Mapped[str | None] = mapped_column(String(100))
+    wrap_doc_text: Mapped[str | None] 
     sections: Mapped[List["Section"]] = relationship(back_populates="document")
 
     def __str__(self):
