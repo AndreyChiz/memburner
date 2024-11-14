@@ -54,7 +54,7 @@ class ApiConfig(BaseModel):
 
 class DatabaseConfig(BaseModel):
     host: str = "localhost"
-    port: int = 5432
+    port: int = 5433
     name: str
     user: str
     password: str
