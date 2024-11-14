@@ -147,3 +147,4 @@ backup.dump.gz
 .debug_venv/
 pyproject.toml
 poetry.lock
+db-docker-volume/
