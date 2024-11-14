@@ -47,7 +47,6 @@ class ApiV1Config(BaseModel):
 
 
 class ApiConfig(BaseModel):
-
     prefix: str = "/api"
     v1: ApiV1Config = ApiV1Config()
 

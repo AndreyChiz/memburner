@@ -36,17 +36,6 @@ class Document(Base):
         return str(self)
 
 
-class Question(Base):
-    __include_id__ = True
-
-    quest_text: Mapped[str] = mapped_column(unique=True)
-    answers: Mapped[list[str]] = mapped_column(ARRAY(String))
-    section_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("section.id"))
-    number_in_chapter: Mapped[int] = mapped_column(SmallInteger)
-
-    section: Mapped["Section"] = relationship(back_populates="questions")
-
-
 class Section(Base):
     __include_id__ = True
 
@@ -55,3 +44,13 @@ class Section(Base):
 
     document: Mapped["Document"] = relationship(back_populates="sections")
     questions: Mapped[List["Question"]] = relationship(back_populates="section")
+
+
+class Question(Base):
+    __include_id__ = True
+
+    quest_text: Mapped[str] = mapped_column(unique=True)
+    answers: Mapped[list[str]] = mapped_column(ARRAY(String))
+    section_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("section.id"))
+
+    section: Mapped["Section"] = relationship(back_populates="questions")
